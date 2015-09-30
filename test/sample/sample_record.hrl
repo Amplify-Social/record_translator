@@ -4,8 +4,7 @@
           city :: binary()}).
 
 -record(person, {
-          name :: binary(),
-          age :: integer(),
-          address :: #address{}}).
-
+          name = <<"Tanaka">> :: binary(),
+          age  = 25 :: integer(),
+          address = #address{} :: #address{}}).
 

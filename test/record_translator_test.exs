@@ -8,8 +8,18 @@ defmodule RecordTranslatorTest do
 
   # test from root directory
   test "defmap" do
-    %{address: %{city: :undefined, country: "Japan", prefecture: "Tokyo"}} = address()
-    %{person: %{address: :undefined, age: :undefined, name: :undefined}} = person()
+    %{person:
+      %{address:
+        %{city: :undefined,
+          country: "Japan",
+          prefecture: "Tokyo"},
+        age: 25,
+        name: "Tanaka"}} = person()
+
+    %{address:
+      %{city: :undefined,
+        country: "Japan",
+        prefecture: "Tokyo"}} = address()
   end
 
 end
