@@ -3,8 +3,12 @@ defmodule RecordTranslatorTest do
   require RecordTranslator
 
   records = Record.extract_all(from: "test/sample/sample_record.hrl")
-  RecordTranslator.defmap :address, records
-  RecordTranslator.defmap :person, records
+  for {record_name, _} <- records do
+      RecordTranslator.defmap record_name, records
+  end
+
+  #RecordTranslator.defmap :address, records
+  #RecordTranslator.defmap :person, records
 
   # test from root directory
   test "defmap" do
