@@ -3,7 +3,7 @@ defmodule RecordTranslator.Mixfile do
 
   def project do
     [app: :record_translator,
-     version: "0.0.1",
+     version: "0.0.2",
      elixir: "~> 1.1.0",
      description: "Erlang's file of records to Elixir's maps",
      package: [
