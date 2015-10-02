@@ -2,14 +2,14 @@
 ## http://github.com/elixir-lang/elixir/blob/v1.0.5/lib/elixir/lib/record/extractor.ex
 ## http://github.com/elixir-lang/elixir/blob/v1.0.5/lib/elixir/lib/record.ex
 
-defmodule RecordTranslator do
+defmodule RecordTranslator.Impl do
   require Record
 
   defmacro defmap(name, kv) do
     quote bind_quoted: [name: name, kv: kv] do
-      fields = RecordTranslator.__fields__(:defmap, kv)
+      fields = RecordTranslator.Impl.__fields__(:defmap, kv)
       defmacro(unquote(name)()) do
-        Macro.escape RecordTranslator.__map__(:defmap, unquote(name), unquote(fields))
+        Macro.escape RecordTranslator.Impl.__map__(:defmap, unquote(name), unquote(fields))
       end
     end
   end
@@ -50,4 +50,18 @@ defmodule RecordTranslator do
     end, fields)
   end
 end
+
+defmodule RecordTranslator do
+  import RecordTranslator.Impl
+
+  defmacro def_all_map(file_name) do
+    quote bind_quoted: [file_name: file_name] do
+      records = Record.extract_all(from: file_name)
+      for {record_name, _} <- records do
+        defmap record_name, records
+      end
+    end
+  end
+end
+
 
