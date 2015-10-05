@@ -22,7 +22,16 @@ defmodule RecordTranslator.Impl do
         tmp = Enum.reduce(attrs, %{},
         fn({para, val}, acc_map)
           when Record.is_record val ->
-            Dict.put(acc_map, para, (__map__(type, para, fields))[para])
+            Dict.put(acc_map, para, __map__(type, para, fields)[para])
+          ({para, val}, acc_map)
+          when is_list val ->
+            map_list =
+            Enum.map(val,
+            fn (record) when Record.is_record record ->
+              name = hd(Tuple.to_list(record))
+              Dict.put(%{}, name, __map__(type, name, fields)[name])
+            end)
+            Dict.put(acc_map, para, map_list)
           ({para, val}, acc_map) ->
             Dict.put(acc_map, para, val)
         end)
