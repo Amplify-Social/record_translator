@@ -21,15 +21,7 @@ defmodule RecordTranslatorTest do
 
     %{team:
       %{name: :undefined,
-        people: [
-          %{person:
-            %{address:
-              %{city: :undefined,
-                country: "Japan",
-                prefecture: "Tokyo"},
-              age: 25,
-              name: "Yamada Taro"}}
-        ]}} = team()
+        people: []}} = team()
   end
 
 end

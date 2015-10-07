@@ -10,5 +10,5 @@
 
 -record(team, {
         name :: binary(),
-        people = [#person{}] :: [#person{}]}).
+        people = [] :: [#person{}]}).
 
