@@ -63,6 +63,9 @@ end
 defmodule RecordTranslator do
   import RecordTranslator.Impl
 
+  @doc """
+  Define all the functions corresponding to the records in an Erlang file.
+  """
   defmacro def_all_map(file_name) do
     quote bind_quoted: [file_name: file_name] do
       records = Record.extract_all(from: file_name)
